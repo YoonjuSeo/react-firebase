@@ -1,4 +1,5 @@
 import React from 'react'
+import Rainbow from '../hoc/Rainbow'
 
 const Contact = (props) =>{
     // setTimeout(() =>{
@@ -11,4 +12,4 @@ const Contact = (props) =>{
         </div>
     )
 }
-export default Contact
+export default Rainbow(Contact)
