@@ -3,7 +3,7 @@ import axios from 'axios'
 
 class Home extends Component {
     state={
-        post: []
+        posts: []
     }
     componentDidMount(){
         axios.get('https://jsonplaceholder.typicode.com/posts/')
