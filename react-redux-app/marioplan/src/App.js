@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter} from 'react-router-dom'
+import Navbar from './components/layout/Navbar'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <h1>MarioPlan</h1>
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <Navbar/>
+        </div>
+      </BrowserRouter>
     );
   }
 }
