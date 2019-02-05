@@ -4,9 +4,11 @@ auth.onAuthStateChanged(user => {
         //get data from firebase.google.com
         db.collection('guides').get().then(snapshot => {
             setupGuides(snapshot.docs);
+            setupUI(user);
         });
     } else {
-      setupGuides([]);
+        setupUI();
+        setupGuides([]);
     }
   });
 
