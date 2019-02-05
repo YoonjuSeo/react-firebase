@@ -1,3 +1,8 @@
+//get data from firebase.google.com
+db.collection('guides').get().then(snapshot => {
+    setupGuides(snapshot.docs);
+});
+
 //listen for auth status changes
 auth.onAuthStateChanged(user => {
     if(user){
@@ -5,7 +10,7 @@ auth.onAuthStateChanged(user => {
     }else{
         console.log('user logged out')
     }
-})
+});
 
 //signup
 const signupForm = document.querySelector('#signup-form');
