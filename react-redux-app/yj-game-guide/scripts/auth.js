@@ -1,16 +1,14 @@
-//get data from firebase.google.com
-db.collection('guides').get().then(snapshot => {
-    setupGuides(snapshot.docs);
-});
-
 //listen for auth status changes
 auth.onAuthStateChanged(user => {
-    if(user){
-        console.log('user logged in : ', user)
-    }else{
-        console.log('user logged out')
+    if (user) {
+        //get data from firebase.google.com
+        db.collection('guides').get().then(snapshot => {
+            setupGuides(snapshot.docs);
+        });
+    } else {
+      setupGuides([]);
     }
-});
+  });
 
 //signup
 const signupForm = document.querySelector('#signup-form');
@@ -54,5 +52,5 @@ loginForm.addEventListener('submit', (e) => {
         const modal = document.querySelector('#modal-login');
         M.Modal.getInstance(modal).close();
         loginForm.reset();
-    })
-})
+    });
+});
