@@ -2,10 +2,10 @@
 auth.onAuthStateChanged(user => {
     if (user) {
         //get data from firebase.google.com
-        db.collection('guides').get().then(snapshot => {
+        db.collection('guides').onSnapshot(snapshot => {
             setupGuides(snapshot.docs);
             setupUI(user);
-        });
+        }, err => console.log(err.message));
     } else {
         setupUI();
         setupGuides([]);
@@ -17,19 +17,18 @@ auth.onAuthStateChanged(user => {
 const createForm = document.querySelector('#create-form');
 createForm.addEventListener('submit', (e) => {
     e.preventDefault();
-
     db.collection('guides').add({
         title: createForm['title'].value,
-        content: createForm['content']
+        content: createForm['content'].value
     }).then(() => {
         //close the modal and reset form
         const modal = document.querySelector('#modal-create');
         M.Modal.getInstance(modal).close();
-        signupForm.reset();
+        createForm.reset();
     }).catch(err => {
         console.log(err.message)
-    })
-})
+    });
+});
 
 
 //signup
