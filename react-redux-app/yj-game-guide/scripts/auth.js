@@ -11,12 +11,14 @@ adminForm.addEventListener('submit', (e) => {
 
 //listen for auth status changes
 auth.onAuthStateChanged(user => {
-    console.log(user);
     if (user) {
+        user.getIdTokenResult().then(idTokenResult => {
+            user.admin = idTokenResult.claims.admin;
+            setupUI(user);
+        })
         //get data from firebase.google.com
         db.collection('guides').onSnapshot(snapshot => {
             setupGuides(snapshot.docs);
-            setupUI(user);
         }, err => console.log(err.message));
     } else {
         setupUI();
